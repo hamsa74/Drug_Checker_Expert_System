@@ -1,63 +1,59 @@
 /* 
-   Project: Drug Interaction Checker (AI202)
+   Project: Expert Drug Interaction System (AI202)
    Team Members:
-   1- Hamsa Mustafa Aboelghit - ID: 202400350 B07
-   2- Yasmen Abdelaziz Ramadan Elqady - ID: 202400477 B09
-   
+   1. Hamsa Mustafa Aboelghit      - 202400350
+   2. Rewan Mamdouh                - 202403264
+   3. Mariem Hassan                - 202403199
+   4. Yasmen Abdelaziz Ramadan     - 202400477
 */
 
-/* 
-   Project: Drug Interaction Checker (AI202)
-   Student: Hamssa - ID: [Your ID]
-   File Description: Part 3 - The Interactive System
-*/
+% --- Main Menu Interface ---
 
-% Load other files automatically
-:- consult('drugs.pl').
-:- consult('rules.pl').
-
-% Main entry point
+% Starts the system and displays the header
 main :-
-    format('~n===========================================~n', []),
-    format('   Welcome to Al-Shifa Pharmacy System     ~n', []),
-    format('===========================================~n', []),
+    shell('cls'), % Clears the terminal screen
+    format('-------------------------------------------~n', []),
+    format('      AL-SHIFA PHARMACY MANAGEMENT SYSTEM  ~n', []),
+    format('-------------------------------------------~n', []),
     menu.
 
+% Displays available options to the user
 menu :-
-    format('~n1. Check interaction between two drugs~n', []),
-    format('2. Get severity recommendation~n', []),
-    format('3. View full interaction profile of a drug~n', []),
-    format('4. Run prescription safety check (List)~n', []),
-    format('5. View all severe interaction alerts~n', []),
-    format('6. Exit the system~n', []),
-    format('~nSelect an option (1-6): ', []),
+    format('~n1. Check Drug Interaction~n', []),
+    format('2. Clinical Recommendation~n', []),
+    format('3. Prescription Scan (Batch)~n', []),
+    format('4. Exit System~n', []),
+    format('~nSelection (1-4) followed by a dot (.): ', []),
     read(Choice),
     execute_choice(Choice).
 
-% Executing user choices
+% Option 1: One-to-one drug check
 execute_choice(1) :- 
-    format('Enter Drug 1: ', []), read(D1),
-    format('Enter Drug 2: ', []), read(D2),
-    check_interaction(D1, D2), menu.
+    format('~nDrug 1: ', []), read(D1),
+    format('Drug 2: ', []), read(D2),
+    check_interaction(D1, D2), return_to_main.
 
+% Option 2: Get medical advice
 execute_choice(2) :- 
-    format('Enter Drug 1: ', []), read(D1),
-    format('Enter Drug 2: ', []), read(D2),
-    recommendation(D1, D2), menu.
+    format('~nDrug 1: ', []), read(D1),
+    format('Drug 2: ', []), read(D2),
+    recommendation(D1, D2), return_to_main.
 
+% Option 3: Check a list of multiple drugs
 execute_choice(3) :- 
-    format('Enter Drug Name: ', []), read(D),
-    drug_profile(D), menu.
+    format('~nEnter list (e.g. [aspirin, warfarin].): ', []), read(L),
+    check_prescription(L), return_to_main.
 
+% Option 4: Close the system
 execute_choice(4) :- 
-    format('Enter list of drugs (e.g., [aspirin, warfarin].): ', []), read(List),
-    check_prescription(List), menu.
+    format('~nExiting system...~n', []), halt.
 
-execute_choice(5) :- 
-    severe_alerts, menu.
-
-execute_choice(6) :- 
-    format('~nExiting system... Goodbye!~n', []), !.
-
+% Handle invalid inputs
 execute_choice(_) :- 
-    format('Invalid choice. Please try again.~n', []), menu.
+    format('~nInvalid entry.~n', []), menu.
+
+% Utility to pause before returning to main menu
+return_to_main :-
+    format('~nPress any key followed by a dot (.) to continue: ', []),
+    read(_),
+    main.

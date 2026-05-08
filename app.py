@@ -80,7 +80,7 @@ class AlShifaDiamondFeedback:
         self.result_box.configure(state="disabled")
 
         # Sidebar Footer
-        members = f"PROJECT TEAM\n{'-'*20}\nHamsa Mustafa\nRewan Mamdouh\nMariem Hassan\nYasmen Abdelaziz"
+        members = f"PROJECT TEAM\n{'-'*20}\nHamsa Mustafa\nRewan Mamdouh\nMariem Hassan\nYasmen Abdelaziz\nOmar saleh el abd"
         self.footer = ctk.CTkLabel(self.sidebar, text=members, font=ctk.CTkFont(size=11), text_color=self.text_secondary, justify="left")
         self.footer.pack(side="bottom", pady=50, padx=40)
 

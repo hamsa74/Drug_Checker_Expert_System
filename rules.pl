@@ -5,6 +5,7 @@
    2. Rewan Mamdouh                - 202403264
    3. Mariem Hassan                - 202403199
    4. Yasmen Abdelaziz Ramadan     - 202400477
+   5. Omar saleh el abd            - 202400664
 */
 
 % --- Inference Rules ---
